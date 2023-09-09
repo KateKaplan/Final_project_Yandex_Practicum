@@ -1,16 +1,16 @@
 SELECT c.login,
 COUNT(o.track)
 FROM "Couriers" AS c
-INNER JOIN "Orders" AS o ON o.id=c.id
-WHERE o.InDelivery=true
-ORDER BY c.login ASC;
+INNER JOIN "Orders" AS o ON c.id = o."courierId"
+WHERE o."InDelivery"=true
+GROUP BY c.login;
 
 
-SELECT *,
+SELECT track,
 CASE
-           WHEN finished = true THEN "2"
-           WHEN canсelled = true THEN "-1"
-           WHEN inDelivery = true THEN "1"
-	   ELSE "0"
+           WHEN finished = true THEN '2'
+           WHEN canсelled = true THEN '-1'
+           WHEN inDelivery = true THEN '1'
+	   ELSE '0'
        END
 FROM "Orders";
